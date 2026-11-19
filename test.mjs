@@ -649,10 +649,10 @@ test('documents: classifies the answer so a viewer page is never saved as a file
 });
 
 test('documents: a title taken from the attachment name is not repeated', () => {
-  const att = {name: '卫生学(第9版)-绪论-防盼盼(1).ppt'};
-  assert.equal(fileNameFor('卫生学(第9版)-绪论-防盼盼', att, 0, 1), '卫生学(第9版)-绪论-防盼盼.ppt');
-  assert.equal(fileNameFor('卫生学(第9版)-绪论-防盼盼', att, 0, 2), '卫生学(第9版)-绪论-防盼盼_1.ppt');
-  assert.equal(fileNameFor('卫生学(第9版)-绪论-防盼盼', att, 1, 2), '卫生学(第9版)-绪论-防盼盼_2.ppt');
+  const att = {name: '示例课程-绪论(1).ppt'};
+  assert.equal(fileNameFor('示例课程-绪论', att, 0, 1), '示例课程-绪论.ppt');
+  assert.equal(fileNameFor('示例课程-绪论', att, 0, 2), '示例课程-绪论_1.ppt');
+  assert.equal(fileNameFor('示例课程-绪论', att, 1, 2), '示例课程-绪论_2.ppt');
 });
 
 test('documents: the viewer status endpoint is a manifest, never a download', () => {
