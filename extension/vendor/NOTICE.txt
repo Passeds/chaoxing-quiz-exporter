@@ -1,0 +1,5 @@
+docx 9.6.1
+https://docx.js.org/
+MIT license: see docx.LICENSE.
+The bundled module is copied without modification from the workspace runtime's docx distribution.
+Bundled dependency copyright notices in docx.mjs are retained.

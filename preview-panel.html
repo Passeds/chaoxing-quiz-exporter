@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN" class="embed">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>面板静态预览</title>
+<link rel="stylesheet" href="extension/dashboard.css">
+<style>
+  /* The fake Chaoxing page behind the panel; preview only. */
+  html.embed body{margin:0;background:#f4f6f5;min-height:100vh;overflow:hidden}
+  .fake{position:fixed;inset:0;display:grid;grid-template-rows:46px 1fr;color:#a4aea9}
+  .fake-top{display:flex;align-items:center;gap:9px;padding:0 18px;background:#fff;border-bottom:1px solid #e9edeb;font:12.5px system-ui}
+  .fake-dot{width:8px;height:8px;border-radius:50%;background:#d3ddd8}
+  .fake-body{display:grid;grid-template-columns:200px 1fr;gap:14px;padding:16px;min-height:0}
+  .fake-side,.fake-main{background:#fff;border:1px solid #e9edeb;border-radius:8px}
+  .fake-side{padding:14px;font:12px/2.5 system-ui}
+  .fake-main{padding:20px}
+  .fake-line{height:9px;border-radius:4px;background:#f0f3f1;margin:11px 0}
+  .fake-line.w50{width:50%}
+  .fake-line.w75{width:75%}
+
+  /* Preview copy of the overlay shell. */
+  .wrap{
+    position:fixed;right:16px;top:16px;z-index:9;
+    display:flex;flex-direction:column;overflow:hidden;
+    width:420px;height:78vh;
+    background:#fff;border:1px solid rgba(18,26,22,.10);border-radius:12px;
+    box-shadow:0 18px 48px -18px rgba(12,24,18,.30),0 2px 6px rgba(12,24,18,.05);
+    font:13px/1.55 system-ui,-apple-system,"Segoe UI Variable","Segoe UI","Microsoft YaHei",sans-serif;color:#141a17;
+  }
+  .bar{
+    flex:0 0 auto;display:flex;align-items:center;gap:8px;height:38px;padding:0 5px 0 11px;
+    background:#fff;border-bottom:1px solid #eef1ef;
+  }
+  .grip{width:12px;height:12px;opacity:.9;background-image:radial-gradient(#ccd6d1 1px,transparent 1.1px);background-size:3.5px 3.5px}
+  .ttl{font-size:12.5px;font-weight:600;letter-spacing:.02em}
+  .ver{font-size:10px;color:#9aa49f}
+  .spacer{flex:1 1 auto}
+  .icon{width:24px;height:24px;border:0;border-radius:6px;background:transparent;color:#6d7873;font:inherit;font-size:12px;cursor:pointer;display:grid;place-items:center}
+  .icon:hover{background:#f2f5f3;color:#141a17}
+  .frame{flex:1 1 auto;border:0;display:block;width:100%;background:#fff;overflow:auto}
+  @media (max-width:520px){
+    .wrap{right:8px;left:8px;top:auto;bottom:8px;width:auto;height:82vh}
+    .fake-body{grid-template-columns:1fr}
+    .fake-side{display:none}
+  }
+</style>
+</head>
+<body>
+<div class="fake" aria-hidden="true">
+  <div class="fake-top"><span class="fake-dot"></span>学习通 · 课程学习页（示意）</div>
+  <div class="fake-body">
+    <div class="fake-side">目录<br>1.1 绪论<br>1.2 卫生法<br>2.1 单元检测</div>
+    <div class="fake-main">
+      <div class="fake-line w50"></div><div class="fake-line"></div><div class="fake-line w75"></div>
+      <div class="fake-line"></div><div class="fake-line w50"></div><div class="fake-line w75"></div>
+      <div class="fake-line"></div><div class="fake-line w50"></div>
+    </div>
+  </div>
+</div>
+
+<div class="wrap" role="dialog" aria-label="学习通题库整理">
+  <div class="bar">
+    <span class="grip"></span>
+    <strong class="ttl">题库整理</strong>
+    <span class="ver">v1.6.0</span>
+    <span class="spacer"></span>
+    <button class="icon" title="在标签页打开">↗</button>
+    <button class="icon" title="收起">–</button>
+    <button class="icon" title="关闭">✕</button>
+  </div>
+  <div class="frame">
+    <main>
+      <header class="top"><h1 class="title">题库整理 <span class="ver">v1.6.0</span></h1><button class="primary">重新扫描</button></header>
+      <label class="field"><span>课程</span><input type="text" value="265420739"></label>
+      <p class="status">已识别：章节检测答卷回看页。本地已有 3 份作业、2 份章节检测。</p>
+
+      <details class="disclosure"><summary>页面信息</summary><p class="meta">页面类型：章节检测答卷回看页。</p><ul class="items"><li>1.1 作业一</li><li>第一单元 单元检测（65 题）</li><li>基本医疗卫生与健康促进法 单元检测（39 题）</li></ul></details>
+
+      <section class="block">
+        <div class="block-head"><h2>采集</h2><p class="meta">作业 3 份 · 章节检测 2 份 · 合计 143 题</p></div>
+        <div class="row"><button disabled>已完成作业</button><button>本章检测</button><button class="quiet" disabled>停止</button><button class="link end">诊断</button></div>
+      </section>
+
+      <section class="block">
+        <div class="block-head"><h2>导出</h2><p class="meta">将导出 2 份检测：第一单元（65 题）、基本医疗卫生（39 题）。</p></div>
+        <div class="row">
+          <label class="field"><span>范围</span><select><option>只导章节检测</option></select></label>
+          <label class="field"><span>检测</span><select><option>全部已采集检测（2 份）</option></select></label>
+          <label class="field"><span>答案</span><select><option>章末集中</option></select></label>
+        </div>
+        <div class="row split">
+          <label class="check"><input type="checkbox" checked> 导出解析</label>
+          <span class="grow"></span>
+          <button class="primary">导出 PDF</button><button>导出 Word</button>
+        </div>
+        <p class="meta">已采集 96 题解析（旧归档需重新采集；未公布的不会生成）。</p>
+      </section>
+
+      <section class="block">
+        <div class="block-head"><h2>课件</h2><button class="link">清空</button></div>
+        <div class="row"><button>扫描本页</button><button disabled>下载全部</button><label class="check"><input type="checkbox"> 含视频音频</label></div>
+        <label class="field"><span>小标题</span><input type="text" value="1.1 绪论"></label>
+        <p class="meta">已扫描 2 个，1 个可下载 · 存到「学习通课件/265420739」</p>
+        <ul class="docs">
+          <li><span>1.1 绪论.ppt（PPT · 8.2 MB · perf · ✓ 已下载）</span><button class="mini">下载</button><button class="mini">直链</button></li>
+          <li><span>1.1 绪论_讲义.pdf（PDF · 1.1 MB · setting · ✗ 没下成）</span><button class="mini">下载</button><button class="mini">直链</button></li>
+        </ul>
+        <details class="disclosure"><summary>手动直链</summary><div class="row"><input type="text" placeholder="粘贴 F12 里带 flag / .pdf 的地址"><button class="mini">加入</button></div></details>
+      </section>
+
+      <details class="disclosure"><summary>使用说明</summary><p class="meta">采集：作业列表页点「已完成作业」；单元检测先滚到页面底部等题目加载完，再点「本章检测」。</p></details>
+      <details class="disclosure logbox"><summary>日志</summary><pre>扫描结果：可尝试 1 个，页面真实文件请求记录 3 条。</pre></details>
+    </main>
+  </div>
+</div>
+</body>
+</html>

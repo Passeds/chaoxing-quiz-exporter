@@ -1,0 +1,192 @@
+:root{
+  --bg:#f7f8f7;
+  --surface:#fff;
+  --ink:#141a17;
+  --ink-1:#3f4a45;
+  --ink-2:#6d7873;
+  --ink-3:#9aa49f;
+  --line:#e9edeb;
+  --line-2:#dde3e0;
+  --accent:#146c53;
+  --accent-ink:#0f5a45;
+  --focus:rgba(20,108,83,.12);
+}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0}
+body{
+  font:13px/1.55 system-ui,-apple-system,"Segoe UI Variable","Segoe UI","Microsoft YaHei",sans-serif;
+  color:var(--ink);
+  background:var(--bg);
+  font-variant-numeric:tabular-nums;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+main{max-width:760px;margin:0 auto;padding:36px 20px 64px}
+html:not(.embed) body{font-size:14px}
+
+/* ---------- page head ---------- */
+.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 2px}
+.title{margin:0;font-size:15px;font-weight:600;letter-spacing:.01em;display:flex;align-items:baseline;gap:8px}
+html:not(.embed) .title{font-size:20px;font-weight:650}
+.ver{font-size:11px;font-weight:400;color:var(--ink-3);letter-spacing:.02em}
+.lede{margin:6px 0 0;font-size:12.5px;color:var(--ink-2);max-width:52ch}
+
+/* The panel already has a title bar, so it keeps only the action. */
+html.embed body{background:var(--surface)}
+html.embed main{max-width:none;padding:12px 14px 20px}
+html.embed .title,html.embed .lede{display:none}
+html.embed .top{justify-content:flex-end;margin:0 0 4px}
+
+/* ---------- controls ---------- */
+button{
+  font:inherit;font-size:12.5px;font-weight:500;letter-spacing:.01em;
+  height:32px;padding:0 12px;
+  border:1px solid var(--line-2);border-radius:7px;
+  background:var(--surface);color:var(--ink-1);cursor:pointer;
+  transition:background .13s ease,border-color .13s ease,color .13s ease,opacity .13s ease;
+  white-space:nowrap;
+}
+button:hover{background:#f6f8f7;color:var(--ink)}
+button:active{background:#eef2f0}
+button.primary{background:#16251e;border-color:#16251e;color:#fff}
+button.primary:hover{background:#20362b;border-color:#20362b}
+button.quiet{background:transparent;border-color:transparent;color:var(--ink-2);padding:0 8px}
+button.quiet:hover{background:#f2f5f3;border-color:transparent}
+button.link{
+  height:auto;padding:0;border:0;background:none;border-radius:0;
+  color:var(--accent-ink);font-size:12px;text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .13s ease;
+}
+button.link:hover{background:none;border-bottom-color:currentColor}
+button.mini{height:26px;padding:0 9px;font-size:11.5px;border-radius:6px}
+button:disabled,.primary:disabled{
+  cursor:not-allowed;opacity:.38;background:var(--surface);border-color:var(--line-2);color:var(--ink-2);
+}
+button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible{
+  outline:2px solid var(--accent);outline-offset:2px;
+}
+
+input[type=text],select{
+  font:inherit;font-size:12.5px;height:32px;min-width:0;
+  padding:0 9px;border:1px solid transparent;border-radius:7px;
+  background:#f2f5f3;color:var(--ink);
+  transition:background .13s ease,border-color .13s ease,box-shadow .13s ease;
+}
+input[type=text]:hover,select:hover{background:#edf1ef}
+input[type=text]:focus,select:focus{
+  background:var(--surface);border-color:#bcd4c8;outline:none;box-shadow:0 0 0 3px var(--focus);
+}
+input[type=text]::placeholder{color:var(--ink-3)}
+select{cursor:pointer;padding-right:6px}
+input[type=checkbox]{width:14px;height:14px;margin:0;accent-color:var(--accent)}
+
+.field{display:flex;align-items:center;gap:8px;flex:1 1 140px;min-width:0;font-size:12px;color:var(--ink-2)}
+.field>span{flex:0 0 auto;white-space:nowrap}
+.field>input,.field>select{flex:1 1 auto;width:100%}
+main>.field{margin-top:14px}
+
+.check{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--ink-2);cursor:pointer;white-space:nowrap}
+.check:hover{color:var(--ink-1)}
+
+.row{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:10px}
+.row>button{flex:0 0 auto}
+.row .end{margin-left:auto}
+.grow{flex:1 1 auto}
+
+/* ---------- status: one quiet line, accent on the rule ---------- */
+.status{
+  margin:12px 0 0;padding:6px 0 6px 10px;
+  border-left:2px solid var(--accent);
+  font-size:12.5px;line-height:1.55;color:var(--ink-1);
+  max-height:8.5em;overflow:auto;overflow-wrap:anywhere;
+}
+.status:empty{display:none}
+
+/* ---------- sections: rules instead of stacked cards ---------- */
+.block{margin-top:18px;padding-top:14px;border-top:1px solid var(--line)}
+.block-head{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+h2{margin:0;font-size:12px;font-weight:650;letter-spacing:.04em;color:var(--ink)}
+.meta{margin:0;font-size:11.5px;line-height:1.55;color:var(--ink-2);overflow-wrap:anywhere}
+.block-head .meta{text-align:left;flex:1 1 auto;min-width:0}
+.block>.meta{margin-top:8px}
+.row+.meta{margin-top:8px}
+
+/* ---------- disclosures ---------- */
+.disclosure{margin-top:14px;padding-top:10px;border-top:1px solid var(--line)}
+.disclosure>summary{
+  display:flex;align-items:center;gap:7px;
+  font-size:11.5px;letter-spacing:.03em;color:var(--ink-3);
+  cursor:pointer;list-style:none;padding:1px 0;transition:color .13s ease;
+}
+.disclosure>summary:hover{color:var(--ink-2)}
+.disclosure>summary::-webkit-details-marker{display:none}
+.disclosure>summary::before{
+  content:"";width:0;height:0;flex:0 0 auto;
+  border-left:4px solid currentColor;
+  border-top:3.4px solid transparent;border-bottom:3.4px solid transparent;
+  transition:transform .15s ease;
+}
+.disclosure[open]>summary::before{transform:rotate(90deg)}
+.disclosure[open]>summary{color:var(--ink-2)}
+.disclosure>.meta{margin-top:7px}
+.logbox>.meta{margin:0}
+
+/* ---------- discovered items ---------- */
+.items{list-style:none;display:flex;flex-wrap:wrap;gap:5px;margin:8px 0 0;padding:0}
+.items li{
+  max-width:100%;padding:1px 8px;
+  font-size:11px;color:var(--ink-2);
+  background:#f3f6f4;border-radius:5px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+
+/* ---------- documents ---------- */
+.docs{list-style:none;margin:4px 0 0;padding:0}
+.docs:empty{display:none}
+.docs li{
+  display:flex;align-items:center;gap:8px;
+  padding:7px 0;border-bottom:1px solid var(--line);
+  font-size:12px;color:var(--ink-1);
+}
+.docs li:last-child{border-bottom:0}
+.docs li>span{flex:1 1 auto;min-width:0;overflow-wrap:anywhere;line-height:1.45}
+.docs li>button{flex:0 0 auto;opacity:.75;transition:opacity .13s ease}
+.docs li:hover>button,.docs li:focus-within>button{opacity:1}
+
+#docUrl{flex:1 1 160px}
+
+pre#log{
+  max-height:180px;overflow:auto;margin:8px 0 0;padding:9px 10px;
+  font:11.5px/1.6 ui-monospace,SFMono-Regular,Consolas,monospace;
+  color:var(--ink-1);background:#f7f9f8;border-radius:7px;
+  white-space:pre-wrap;overflow-wrap:anywhere;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width:520px){
+  main{padding:14px 12px 28px}
+  html.embed main{padding:10px 12px 16px}
+  button{height:38px;font-size:13px}
+  button.mini{height:30px;font-size:12px}
+  input[type=text],select{height:38px;font-size:13.5px}
+  .row>button{flex:1 1 auto}
+  .row .end{margin-left:0;flex:0 0 auto}
+  .field{flex:1 1 100%}
+  .split .grow{display:none}
+  .block-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .block-head .meta{text-align:left}
+  .docs li{flex-wrap:wrap}
+  .docs li>span{flex:1 1 100%}
+  .docs li>button{flex:1 1 auto}
+}
+
+/* Touch screens cannot hover, so keep row actions visible there. */
+@media (hover:none){
+  .docs li>button{opacity:1}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none!important}
+}

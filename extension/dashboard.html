@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>学习通题库整理</title>
+<link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+<main>
+  <header class="top">
+    <h1 class="title">题库整理 <span id="ver" class="ver">本地工具</span></h1>
+    <button id="scan" class="primary">扫描当前页</button>
+  </header>
+  <p class="lede">读取你已完成的作业与单元检测，把题目、答案和解析整理成本地题库。</p>
+
+  <label class="field"><span>课程</span><input id="courseId" type="text" placeholder="扫描后自动填入课程编号"></label>
+  <p id="status" class="status" role="status">准备读取来源标签页。</p>
+
+  <details class="disclosure">
+    <summary>页面信息</summary>
+    <p id="sourceInfo" class="meta">尚未扫描。</p>
+    <ul id="list" class="items"></ul>
+  </details>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>采集</h2>
+      <p id="counts" class="meta">作业 0 份 · 章节检测 0 份 · 合计 0 题</p>
+    </div>
+    <div class="row">
+      <button id="start" disabled>已完成作业</button>
+      <button id="grab">本章检测</button>
+      <button id="stop" class="quiet" disabled>停止</button>
+      <button id="diagnose" class="link end">诊断</button>
+    </div>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>导出</h2>
+      <p id="exportPreview" class="meta"></p>
+    </div>
+    <div class="row">
+      <label class="field"><span>范围</span>
+        <select id="scope">
+          <option value="all">全部合并</option>
+          <option value="works">只导作业</option>
+          <option value="quiz">只导章节检测</option>
+        </select>
+      </label>
+      <label class="field" id="quizPickRow"><span>检测</span>
+        <select id="quizPick">
+          <option value="__all">全部已采集检测</option>
+        </select>
+      </label>
+      <label class="field"><span>答案</span>
+        <select id="answerMode">
+          <option value="end">章末集中</option>
+          <option value="inline">紧跟题目</option>
+        </select>
+      </label>
+    </div>
+    <div class="row split">
+      <label class="check"><input id="showExplanations" type="checkbox" checked> 导出解析</label>
+      <span class="grow"></span>
+      <button id="pdf" class="primary">导出 PDF</button>
+      <button id="docx">导出 Word</button>
+    </div>
+    <p id="explanationCount" class="meta"></p>
+  </section>
+
+  <section class="block">
+    <div class="block-head">
+      <h2>课件</h2>
+      <button id="clearDocs" class="link">清空</button>
+    </div>
+    <div class="row">
+      <button id="scanDocs">扫描本页</button>
+      <button id="downloadDocs" disabled>下载全部</button>
+      <label class="check"><input id="includeMedia" type="checkbox"> 含视频音频</label>
+    </div>
+    <label class="field"><span>小标题</span><input id="docTitle" type="text" placeholder="扫描后自动填入，可修改"></label>
+    <p id="docStatus" class="meta">尚未扫描课件。</p>
+    <ul id="docList" class="docs"></ul>
+    <details class="disclosure">
+      <summary>手动直链</summary>
+      <div class="row">
+        <input id="docUrl" type="text" placeholder="粘贴 F12 里带 flag / .pdf 的地址">
+        <button id="addDocUrl" class="mini">加入</button>
+      </div>
+    </details>
+  </section>
+
+  <details class="disclosure">
+    <summary>使用说明</summary>
+    <p class="meta">采集：作业列表页点「已完成作业」；单元检测先滚到页面底部等题目加载完，再点「本章检测」。每次采一份，导出会自动切到最近采集的那份。</p>
+    <p class="meta">导出：PDF 在预览页选「另存为 PDF」，A4、100%、关闭页眉页脚；Word 直接下载可编辑文件。</p>
+    <p class="meta">课件：打开能翻页看 PPT 的章节页，先翻到第 2 页让浏览器请求一次，再扫描。文件存到「下载 / 学习通课件 / 课程编号 /」，文件名即小标题。</p>
+  </details>
+
+  <details class="disclosure logbox">
+    <summary>日志</summary>
+    <pre id="log"></pre>
+  </details>
+</main>
+<script type="module" src="dashboard.js"></script>
+</body>
+</html>

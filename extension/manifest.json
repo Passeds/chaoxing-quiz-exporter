@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "学习通作业题库整理",
+  "version": "1.6.0",
+  "description": "在你登录后，读取课程中已完成作业与章节检测的题目、公布答案和解析，整理本地题库；并可批量下载章节课件（PPT/PDF）。",
+  "permissions": ["scripting", "storage", "downloads"],
+  "host_permissions": ["https://*.chaoxing.com/*"],
+  "action": {"default_title": "整理当前课程作业 / 章节检测 / 下载课件"},
+  "background": {"service_worker": "background.js"},
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "dashboard.html",
+        "dashboard.css",
+        "dashboard.js",
+        "core.mjs",
+        "word.mjs",
+        "documents.mjs",
+        "extract.js",
+        "vendor/docx.mjs"
+      ],
+      "matches": ["https://*.chaoxing.com/*"]
+    }
+  ]
+}
